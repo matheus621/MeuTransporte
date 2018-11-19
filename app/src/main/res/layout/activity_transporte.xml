@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TransporteActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/lista_motoristas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Motoristas"
+        android:onClick="carregarListaMotorista"/>
+
+    <Button
+        android:id="@+id/lista_gestor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestores"
+        android:onClick="carregarListaGestor"/>
+
+    <Button
+        android:id="@+id/maps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mapa"/>
+
+</LinearLayout>
