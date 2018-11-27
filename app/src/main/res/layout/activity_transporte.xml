@@ -22,6 +22,13 @@
         android:onClick="carregarListaGestor"/>
 
     <Button
+        android:id="@+id/lista_pedidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pedidos"
+        android:onClick="carregarListaPedidos"/>
+
+    <Button
         android:id="@+id/maps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

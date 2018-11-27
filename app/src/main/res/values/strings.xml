@@ -1,4 +1,5 @@
 <resources>
     <string name="google_maps_API_key">AIzaSyCTLEBiBN9ewUL6-g3yhrBC7DgKkzzkBB0</string>
     <string name="app_name">Meu Transporte</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

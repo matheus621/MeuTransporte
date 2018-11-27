@@ -14,7 +14,7 @@ import br.com.matheus.meutransporte.modelo.Gestor;
 
 public class DefaultGestorDAO extends SQLiteOpenHelper{
     public DefaultGestorDAO(Context context, Class<Gestor> Gestor) {
-        super(context, "Meu Transporte", null, 3);
+        super(context, "Meu Transporte", null, 4);
     }
 
     @Override

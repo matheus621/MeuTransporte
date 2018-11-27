@@ -4,11 +4,11 @@
     package="br.com.matheus.meutransporte">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -17,11 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCTLEBiBN9ewUL6-g3yhrBC7DgKkzzkBB0"/>
-
+            android:value="AIzaSyCTLEBiBN9ewUL6-g3yhrBC7DgKkzzkBB0" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -33,18 +31,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListaMotoristasActivity">
-        </activity>
-        <activity android:name=".ListaGestorActivity">
-        </activity>
+        <activity android:name=".ListaMotoristasActivity"></activity>
+        <activity android:name=".ListaGestorActivity"></activity>
         <activity
             android:name=".FormularioActivity"
-            android:label="Formulário">
-        </activity>
-        <activity android:name=".FormularioGestorActivity">
-        </activity>
-        <activity android:name=".RotaActivity">
-        </activity>
+            android:label="Formulário"></activity>
+        <activity android:name=".FormularioGestorActivity"></activity>
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

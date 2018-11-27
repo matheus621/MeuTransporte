@@ -14,24 +14,26 @@ import br.com.matheus.meutransporte.modelo.Motorista;
 
 public class DefaultMotoristaDAO extends SQLiteOpenHelper{
     public DefaultMotoristaDAO(Context context, Class<Motorista> Motorista) {
-        super(context, "Meu Transporte", null, 3);
+        super(context, "Meu Transporte", null, 4);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE Motoristas (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT, telefone TEXT, site TEXT, nota REAL, caminhoFoto TEXT);";
+        String sql2 = "CREATE TABLE Pedidos (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT);";
         String sql1 = "CREATE TABLE Gestor(id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT, telefone TEXT, site TEXT, nota REAL, caminhoFoto TEXT);";
         db.execSQL(sql1);
         db.execSQL(sql);
+        db.execSQL(sql2);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String sql = "";
         switch (oldVersion){
-//            case 3:
-//                sql = "CREATE TABLE Gestor(id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT, telefone TEXT, site TEXT, nota REAL, caminhoFoto TEXT);";
-//                db.execSQL(sql);
+            case 4:
+                sql = "CREATE TABLE Pedidos (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT);";
+                db.execSQL(sql);
 
         }
 
