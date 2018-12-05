@@ -5,21 +5,20 @@ import org.json.JSONStringer;
 
 import java.util.List;
 
-import br.com.matheus.meutransporte.modelo.Gestor;
 
+import br.com.matheus.meutransporte.modelo.Pedido;
 
-public class GestorConverter {
+public class PedidoConverter {
 
-    public String converteParaJSON(List<Gestor> gestor) {
+    public String converteParaJSON(List<Pedido> pedidos) {
         JSONStringer js = new JSONStringer();
 
         try {
-            js.object().key("list").array().object().key("gestor").array();
-            for (Gestor gestores : gestor){
+            js.object().key("list").array().object().key("pedidos").array();
+            for (Pedido pedido : pedidos){
                 js.object();
-                js.key("nome").value(gestores.getNome());
-                js.key("endereco").value(gestores.getEndereco());
-                js.key("telefone").value(gestores.getTelefone());
+                js.key("nome").value(pedido.getNome());
+                js.key("endereco").value(pedido.getEndereco());
                 js.endObject();
             }
             js.endArray().endObject().endArray().endObject();

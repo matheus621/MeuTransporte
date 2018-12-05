@@ -17,7 +17,8 @@ public class MotoristaConverter {
             for (Motorista motorista : motoristas){
                 js.object();
                 js.key("nome").value(motorista.getNome());
-                js.key("nota").value(motorista.getNota());
+                js.key("endereco").value(motorista.getEndereco());
+                js.key("telefone").value(motorista.getTelefone());
                 js.endObject();
             }
             js.endArray().endObject().endArray().endObject();

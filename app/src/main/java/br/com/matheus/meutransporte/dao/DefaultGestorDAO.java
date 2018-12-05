@@ -46,12 +46,12 @@ public class DefaultGestorDAO extends SQLiteOpenHelper{
     @NonNull
     private ContentValues pegaDadosDoGestor(Gestor gestor) {
         ContentValues dados = new ContentValues();
-        dados.put("nome", gestor.getNome());
-        dados.put("endereco", gestor.getEndereco());
-        dados.put("telefone", gestor.getTelefone());
-        dados.put("site", gestor.getSite());
-        dados.put("nota", gestor.getNota());
-        dados.put("caminhoFoto", gestor.getCaminhoFoto());
+//        dados.put("nome", gestor.getNome());
+//        dados.put("endereco", gestor.getEndereco());
+//        dados.put("telefone", gestor.getTelefone());
+//        dados.put("site", gestor.getSite());
+//        dados.put("nota", gestor.getNota());
+//        dados.put("caminhoFoto", gestor.getCaminhoFoto());
         return dados;
     }
 
@@ -63,13 +63,13 @@ public class DefaultGestorDAO extends SQLiteOpenHelper{
         List<Gestor> gestores = new ArrayList<Gestor>();
         while (c.moveToNext()){
             Gestor gestor = new Gestor();
-            gestor.setId(c.getLong(c.getColumnIndex("id")));
-            gestor.setNome(c.getString(c.getColumnIndex("nome")));
-            gestor.setEndereco(c.getString(c.getColumnIndex("endereco")));
-            gestor.setTelefone(c.getString(c.getColumnIndex("telefone")));
-            gestor.setSite(c.getString(c.getColumnIndex("site")));
-            gestor.setNota(c.getDouble(c.getColumnIndex("nota")));
-            gestor.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
+//            gestor.setId(c.getLong(c.getColumnIndex("id")));
+//            gestor.setNome(c.getString(c.getColumnIndex("nome")));
+//            gestor.setEndereco(c.getString(c.getColumnIndex("endereco")));
+//            gestor.setTelefone(c.getString(c.getColumnIndex("telefone")));
+//            gestor.setSite(c.getString(c.getColumnIndex("site")));
+//            gestor.setNota(c.getDouble(c.getColumnIndex("nota")));
+//            gestor.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
 
             gestores.add(gestor);
 

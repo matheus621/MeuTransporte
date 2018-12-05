@@ -33,9 +33,9 @@ public class FormularioHelper {
         motorista.setNome(campoNome.getText().toString());
         motorista.setEndereco(campoEndereco.getText().toString());
         motorista.setTelefone(campoTelefone.getText().toString());
-        motorista.setSite(campoSite.getText().toString());
-        motorista.setNota(Double.valueOf(campoNota.getProgress()));
-        motorista.setCaminhoFoto((String) campoFoto.getTag());
+//        motorista.setSite(campoSite.getText().toString());
+//        motorista.setNota(Double.valueOf(campoNota.getProgress()));
+//        motorista.setCaminhoFoto((String) campoFoto.getTag());
 
         return motorista;
     }
@@ -44,9 +44,9 @@ public class FormularioHelper {
         campoNome.setText(motorista.getNome());
         campoEndereco.setText(motorista.getEndereco());
         campoTelefone.setText(motorista.getTelefone());
-        campoSite.setText(motorista.getSite());
-        campoNota.setProgress(motorista.getNota().intValue());
-        carregaImagem(motorista.getCaminhoFoto());
+//        campoSite.setText(motorista.getSite());
+//        campoNota.setProgress(motorista.getNota().intValue());
+//        carregaImagem(motorista.getCaminhoFoto());
         this.motorista = motorista;
     }
 

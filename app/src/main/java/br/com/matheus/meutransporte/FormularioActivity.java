@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import br.com.matheus.meutransporte.dao.DefaultMotoristaDAO;
 import br.com.matheus.meutransporte.modelo.Motorista;
 
 public class FormularioActivity extends AppCompatActivity {
@@ -71,14 +70,14 @@ public class FormularioActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
                 Motorista motorista = helper.pegaMotorista();
-
-                DefaultMotoristaDAO dao = new DefaultMotoristaDAO(this, Motorista.class);
-                if (motorista.getId() != null) {
-                    dao.altera(motorista);
-                } else {
-                    dao.insereMotorista(motorista);
-                }
-                dao.close();
+//
+//                DefaultMotoristaDAO dao = new DefaultMotoristaDAO(this, Motorista.class);
+//                if (motorista.getId() != null) {
+//                    dao.altera(motorista);
+//                } else {
+//                    dao.insereMotorista(motorista);
+//                }
+//                dao.close();
 
                 Toast.makeText(FormularioActivity.this, "Motorista " + motorista.getNome() + " salvo com Sucesso!", Toast.LENGTH_SHORT).show();
 

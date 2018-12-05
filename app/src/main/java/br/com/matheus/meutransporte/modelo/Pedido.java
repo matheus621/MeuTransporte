@@ -2,12 +2,10 @@ package br.com.matheus.meutransporte.modelo;
 
 import java.io.Serializable;
 
-public class Gestor implements Serializable{
+public class Pedido implements Serializable{
     private Long id;
     private String nome;
     private String endereco;
-    private String telefone;
-
 
 
     public Long getId() {
@@ -34,16 +32,4 @@ public class Gestor implements Serializable{
         this.endereco = endereco;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    @Override
-    public String toString() {
-        return getNome();
-    }
 }

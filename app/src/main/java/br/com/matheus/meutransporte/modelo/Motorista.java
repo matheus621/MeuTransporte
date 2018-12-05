@@ -7,9 +7,6 @@ public class Motorista implements Serializable{
     private String nome;
     private String endereco;
     private String telefone;
-    private String site;
-    private Double nota;
-    private String caminhoFoto;
 
 
     public Long getId() {
@@ -42,30 +39,6 @@ public class Motorista implements Serializable{
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
-
-    public Double getNota() {
-        return nota;
-    }
-
-    public void setNota(Double nota) {
-        this.nota = nota;
-    }
-
-    public String getCaminhoFoto() {
-        return caminhoFoto;
-    }
-
-    public void setCaminhoFoto(String caminhoFoto) {
-        this.caminhoFoto = caminhoFoto;
     }
 
     @Override

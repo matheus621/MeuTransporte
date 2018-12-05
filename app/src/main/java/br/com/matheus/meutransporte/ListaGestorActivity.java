@@ -19,59 +19,87 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.matheus.meutransporte.adapter.GestorAdapter;
+import br.com.matheus.meutransporte.bootstrap.APIClient;
 import br.com.matheus.meutransporte.converter.GestorConverter;
 import br.com.matheus.meutransporte.dao.DefaultGestorDAO;
 import br.com.matheus.meutransporte.modelo.Gestor;
+import br.com.matheus.meutransporte.resource.GestorResource;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListaGestorActivity extends AppCompatActivity {
 
-    private ListView listaGestor;
+    private ListView listViewGestor;
+    private List<Gestor> listaGestor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_gestor);
 
-        listaGestor = (ListView) findViewById(R.id.lista_gestor);
+//        listaGestor = (ListView) findViewById(R.id.lista_gestor);
+//
+//        listaGestor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+//                Gestor gestor = (Gestor) listaGestor.getItemAtPosition(position);
+//
+//                Intent intentVaiProFormulario = new Intent(ListaGestorActivity.this, FormularioGestorActivity.class);
+//                intentVaiProFormulario.putExtra("Gestor", gestor);
+//                startActivity(intentVaiProFormulario);
+//            }
+//        });
+//
+//
+//        Button novoGestor = (Button) findViewById(R.id.novo_gestor);
+//        novoGestor.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentVaiProFormulario = new Intent(ListaGestorActivity.this, FormularioGestorActivity.class);
+//                startActivity(intentVaiProFormulario);
+//            }
+//        });
+//
+//        registerForContextMenu(listaGestor);
+//    }
+//
+//    public void carregarListaGestor() {
+//        DefaultGestorDAO dao = new DefaultGestorDAO(this, Gestor.class);
+//        List<Gestor> gestor = dao.buscaGestor();
+//        dao.close();
+//
+//        GestorAdapter adapter = new GestorAdapter(this, gestor);
+//        listaGestor.setAdapter(adapter);
+//
+//    }
+        GestorResource apiGestorResource = APIClient.getClient().create(GestorResource.class);
 
-        listaGestor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
-                Gestor gestor = (Gestor) listaGestor.getItemAtPosition(position);
+        Call<List<Gestor>> get = apiGestorResource.get();
 
-                Intent intentVaiProFormulario = new Intent(ListaGestorActivity.this, FormularioGestorActivity.class);
-                intentVaiProFormulario.putExtra("Gestor", gestor);
-                startActivity(intentVaiProFormulario);
+        get.enqueue(new Callback<List<Gestor>>() {
+
+
+            public void onResponse(Call<List<Gestor>> call, Response<List<Gestor>> response) {
+                listViewGestor = findViewById(R.id.lista_gestor);
+
+                listaGestor = response.body();
+
+                GestorAdapter pessoaAdapter = new GestorAdapter(getApplicationContext(), listaGestor);
+                listViewGestor.setAdapter(pessoaAdapter);
+            }
+
+
+            public void onFailure(Call<List<Gestor>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(),Toast.LENGTH_LONG).show();
             }
         });
-
-
-        Button novoGestor = (Button) findViewById(R.id.novo_gestor);
-        novoGestor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentVaiProFormulario = new Intent(ListaGestorActivity.this, FormularioGestorActivity.class);
-                startActivity(intentVaiProFormulario);
-            }
-        });
-
-        registerForContextMenu(listaGestor);
-    }
-
-    public void carregarListaGestor() {
-        DefaultGestorDAO dao = new DefaultGestorDAO(this, Gestor.class);
-        List<Gestor> gestor = dao.buscaGestor();
-        dao.close();
-
-        GestorAdapter adapter = new GestorAdapter(this, gestor);
-        listaGestor.setAdapter(adapter);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        carregarListaGestor();
+//        carregarListaGestor();
     }
 
     @Override
@@ -85,12 +113,10 @@ public class ListaGestorActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_enviar_notas:
-                DefaultGestorDAO dao = new DefaultGestorDAO(this, Gestor.class);
-                List<Gestor> gestor = dao.buscaGestor();
-                dao.close();
+
 
                 GestorConverter conversor = new GestorConverter();
-                String json = conversor.converteParaJSON(gestor);
+                String json = conversor.converteParaJSON(listaGestor);
 
                 Toast.makeText(this,json, Toast.LENGTH_LONG).show();
                 break;
@@ -101,61 +127,61 @@ public class ListaGestorActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        final Gestor gestor = (Gestor) listaGestor.getItemAtPosition(info.position);
-
-        MenuItem itemLigar = menu.add("Ligar");
-        itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if (ActivityCompat.checkSelfPermission(ListaGestorActivity.this, Manifest.permission.CALL_PHONE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(ListaGestorActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
-                } else {
-                    Intent intentLigar = new Intent(Intent.ACTION_CALL);
-                    intentLigar.setData(Uri.parse("tel:" + gestor.getTelefone()));
-                    startActivity(intentLigar);
-                }
-                return false;
-            }
-        });
-
-
-        MenuItem itemSMS = menu.add("Enviar SMS");
-        Intent intentSMS = new Intent(Intent.ACTION_VIEW);
-        intentSMS.setData(Uri.parse("sms:" + gestor.getTelefone()));
-        itemSMS.setIntent(intentSMS);
-
-        MenuItem itemMapa = menu.add("Visualizar no mapa");
-        Intent intentMapa = new Intent(Intent.ACTION_VIEW);
-        intentMapa.setData(Uri.parse("geo:0,0?q=" + gestor.getEndereco()));
-        itemMapa.setIntent(intentMapa);
-
-
-        MenuItem itemSite = menu.add("Visitar site");
-        Intent intentSite = new Intent(Intent.ACTION_VIEW);
-
-        String site = gestor.getSite();
-        if (!site.startsWith("http://")) {
-            site = "http://" + site;
-        }
-
-        intentSite.setData(Uri.parse(site));
-        itemSite.setIntent(intentSite);
-
-        MenuItem deletar = menu.add("Deletar");
-        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-
-
-                DefaultGestorDAO dao = new DefaultGestorDAO(ListaGestorActivity.this, Gestor.class);
-                dao.deleta(gestor);
-                dao.close();
-                carregarListaGestor();
-
-                Toast.makeText(ListaGestorActivity.this, "Gestor " + gestor.getNome() + " deletado!", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
+//        final Gestor gestor = (Gestor) listaGestor.getItemAtPosition(info.position);
+//
+//        MenuItem itemLigar = menu.add("Ligar");
+//        itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//                if (ActivityCompat.checkSelfPermission(ListaGestorActivity.this, Manifest.permission.CALL_PHONE)
+//                        != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(ListaGestorActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
+//                } else {
+//                    Intent intentLigar = new Intent(Intent.ACTION_CALL);
+//                    intentLigar.setData(Uri.parse("tel:" + gestor.getTelefone()));
+//                    startActivity(intentLigar);
+//                }
+//                return false;
+//            }
+//        });
+//
+//
+//        MenuItem itemSMS = menu.add("Enviar SMS");
+//        Intent intentSMS = new Intent(Intent.ACTION_VIEW);
+//        intentSMS.setData(Uri.parse("sms:" + gestor.getTelefone()));
+//        itemSMS.setIntent(intentSMS);
+//
+//        MenuItem itemMapa = menu.add("Visualizar no mapa");
+//        Intent intentMapa = new Intent(Intent.ACTION_VIEW);
+//        intentMapa.setData(Uri.parse("geo:0,0?q=" + gestor.getEndereco()));
+//        itemMapa.setIntent(intentMapa);
+//
+//
+//        MenuItem itemSite = menu.add("Visitar site");
+//        Intent intentSite = new Intent(Intent.ACTION_VIEW);
+//
+////        String site = gestor.getSite();
+////        if (!site.startsWith("http://")) {
+////            site = "http://" + site;
+////        }
+////
+////        intentSite.setData(Uri.parse(site));
+//        itemSite.setIntent(intentSite);
+//
+//        MenuItem deletar = menu.add("Deletar");
+//        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//
+//
+//                DefaultGestorDAO dao = new DefaultGestorDAO(ListaGestorActivity.this, Gestor.class);
+//                dao.deleta(gestor);
+//                dao.close();
+//                carregarListaGestor();
+//
+//                Toast.makeText(ListaGestorActivity.this, "Gestor " + gestor.getNome() + " deletado!", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
     }
 }

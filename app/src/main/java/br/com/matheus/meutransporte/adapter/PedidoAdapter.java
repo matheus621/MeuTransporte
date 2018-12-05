@@ -1,58 +1,50 @@
 package br.com.matheus.meutransporte.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import br.com.matheus.meutransporte.R;
-import br.com.matheus.meutransporte.modelo.Gestor;
+import br.com.matheus.meutransporte.modelo.Pedido;
 
-
-public class GestorAdapter extends BaseAdapter {
-    private final List<Gestor> gestores;
+public class PedidoAdapter extends BaseAdapter {
+    private final List<Pedido> pedidos;
     private final Context context;
 
-    public GestorAdapter(Context context, List<Gestor> gestor) {
+    public PedidoAdapter(Context context, List<Pedido> pedidos) {
         this.context = context;
-        this.gestores = gestor;
+        this.pedidos = pedidos;
     }
 
     @Override
     public int getCount() {
-        return gestores.size();
+        return pedidos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return gestores.get(position);
+        return pedidos.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return gestores.get(position).getId();
+        return pedidos.get(position).getId();
     }
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        Gestor gestor = gestores.get(position);
+        Pedido pedido = pedidos.get(position);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View testView = inflater.inflate(R.layout.list_item, null);
 
         TextView campoNome = testView.findViewById(R.id.item_nome);
-        campoNome.setText(gestor.getNome());
-
-        TextView campoTelefone = testView.findViewById(R.id.item_telefone);
-        campoTelefone.setText(gestor.getTelefone());
-
+        campoNome.setText(pedido.getNome());
 
         return testView;
     }

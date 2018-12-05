@@ -35,9 +35,9 @@ public class FormularioHelperGestor {
         gestor.setNome(campoNome.getText().toString());
         gestor.setEndereco(campoEndereco.getText().toString());
         gestor.setTelefone(campoTelefone.getText().toString());
-        gestor.setSite(campoSite.getText().toString());
-        gestor.setNota(Double.valueOf(campoNota.getProgress()));
-        gestor.setCaminhoFoto((String) campoFoto.getTag());
+//        gestor.setSite(campoSite.getText().toString());
+//        gestor.setNota(Double.valueOf(campoNota.getProgress()));
+//        gestor.setCaminhoFoto((String) campoFoto.getTag());
 
         return gestor;
     }
@@ -46,9 +46,9 @@ public class FormularioHelperGestor {
         campoNome.setText(gestor.getNome());
         campoEndereco.setText(gestor.getEndereco());
         campoTelefone.setText(gestor.getTelefone());
-        campoSite.setText(gestor.getSite());
-        campoNota.setProgress(gestor.getNota().intValue());
-        carregaImagemGestor(gestor.getCaminhoFoto());
+//        campoSite.setText(gestor.getSite());
+//        campoNota.setProgress(gestor.getNota().intValue());
+//        carregaImagemGestor(gestor.getCaminhoFoto());
         this.gestor = gestor;
     }
 

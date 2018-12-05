@@ -52,14 +52,6 @@ public class MotoristaAdapter extends BaseAdapter {
         TextView campoTelefone = testView.findViewById(R.id.item_telefone);
         campoTelefone.setText(motorista.getTelefone());
 
-        ImageView campoFoto = testView.findViewById(R.id.item_foto);
-        String caminhoFoto = motorista.getCaminhoFoto();
-        if (caminhoFoto != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
-            Bitmap bitmapReduzida = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
-            campoFoto.setImageBitmap(bitmapReduzida);
-            campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
-        }
 
         return testView;
     }
